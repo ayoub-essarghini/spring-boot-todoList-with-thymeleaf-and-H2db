@@ -17,23 +17,20 @@ public class TaskController {
     private TaskRepository taskRepository;
 
     @GetMapping("/tasks")
-    public String tasks(Model model)
-    {
+    public String tasks(Model model) {
         List<Task> tasks = taskRepository.findAll();
         model.addAttribute("tasks", tasks);
         return "tasks";
     }
 
     @GetMapping("/task/create")
-    public String create(Model model)
-    {
+    public String create(Model model) {
         model.addAttribute("task", new Task());
         return "create/create_task";
     }
 
     @PostMapping("/task/new")
-    public String new_task(@ModelAttribute Task task)
-    {
+    public String new_task(@ModelAttribute Task task) {
         taskRepository.save(task);
         return "redirect:/tasks";
     }
@@ -45,17 +42,17 @@ public class TaskController {
         if (taskOptional.isPresent()) {
             Task task = taskOptional.get();
             model.addAttribute("task", task);
-            return "edit/edit_task"; // Make sure this view exists in templates/edit
+            return "edit/edit_task";
         } else {
             model.addAttribute("error", "Task not found");
-            return "error/404"; // Make sure this view exists in templates/error
+            return "error/404";
         }
     }
 
     @PostMapping("/task/update")
     public String updateTask(@ModelAttribute Task task) {
-        taskRepository.save(task); // Save the updated task
-        return "redirect:/tasks"; // Redirect to the tasks list after update
+        taskRepository.save(task);
+        return "redirect:/tasks";
     }
 
     @GetMapping("/list-tasks")
@@ -63,6 +60,7 @@ public class TaskController {
     public List<Task> getTasks() {
         return taskRepository.findAll();
     }
+
     @GetMapping("/delete")
     public String delete(Long id) {
         taskRepository.deleteById(id);

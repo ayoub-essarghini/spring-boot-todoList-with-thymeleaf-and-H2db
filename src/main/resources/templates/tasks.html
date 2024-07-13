@@ -10,7 +10,10 @@
     <h3 class="text-center text-primary p-3">Tasks List</h3>
     <div class="card card-body p-2">
        <a href="/task/create" class="btn btn-primary m-2" style="width: 150px">Create new Task</a>
-        <table class="table table-striped">
+        <div th:if="${#lists.size(tasks) == 0}" class="alert alert-warning text-center p-4">
+            Data not found
+        </div>
+        <table th:if="${#lists.size(tasks) > 0}" class="table table-striped">
             <thead>
             <tr>
                 <th>Id</th>
