@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.1/css/bootstrap.min.css">
+    <title>Edit Task</title>
+</head>
+<body>
+<div class="container">
+    <h3 class="text-center text-primary p-3">Edit Task</h3>
+    <div class="card card-body p-2">
+        <form th:action="@{/task/update}" th:object="${task}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="mb-3">
+                <label for="task_title" class="form-label">Task title</label>
+                <input type="text" class="form-control" id="task_title" th:field="*{title}">
+            </div>
+
+            <div class="mb-3">
+                <label for="task_desc" class="form-label">Task description</label>
+                <input type="text" class="form-control" id="task_desc" th:field="*{description}">
+            </div>
+
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
